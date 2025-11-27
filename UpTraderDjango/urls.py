@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from menu_tree_solution.views import  menu_tree_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('menu_tree/', menu_tree_view, name='menu_tree_main'),
 ]
