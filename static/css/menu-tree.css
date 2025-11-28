@@ -78,7 +78,6 @@
 }
 
 .menu-tree .first-parent::before {
-    content: "🏠 ";
     margin-right: 5px;
 }
 
