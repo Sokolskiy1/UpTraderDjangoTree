@@ -1,0 +1,9 @@
+{% for item in parents %}
+    {% if forloop.first %}
+        <a href="http://127.0.0.1:8080/menu_tree/">Первый {{ item.name }}</a>
+    {% else %}
+        <a href="http://127.0.0.1:8080/other_link/{{ item.name }}">Родитель {{ item.name }}</a>
+    {% endif %}
+{% empty %}
+    <li>No items found</li>
+{% endfor %}
