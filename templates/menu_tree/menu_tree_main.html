@@ -1,7 +1,15 @@
+<!DOCTYPE html>
 {% load extra_tag %}
-<div class="menu-tree">
-{#Родители#}
-    {# Родители #}
+
+
+
+<html>
+<head>
+    <link rel="stylesheet" href="/static/css/menu-tree.css">
+</head>
+<body>
+    <div class="menu-tree">
+       {# Родители #}
     {% include "menu_tree/menu_parents.html" %}
     
     {# Текущий элемент #}
@@ -9,4 +17,6 @@
     
     {# Дети #}
     {% include "menu_tree/menu_children.html" %}
-</div>
+    </div>
+</body>
+</html>

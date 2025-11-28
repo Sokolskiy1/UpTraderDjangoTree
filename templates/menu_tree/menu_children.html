@@ -1,5 +1,5 @@
 {% for item in childrens %}
-    <a href="http://127.0.0.1:8080/menu_tree/{{ item.name }}">Ребенок {{ item.name }}</a>
+    <a href="http://127.0.0.1:8080/menu_tree/{{ item.name }}" class="child-item">Ребенок {{ item.name }}</a>
 {% empty %}
-    <li>No items found</li>
+    <li class="no-items">No items found</li>
 {% endfor %}

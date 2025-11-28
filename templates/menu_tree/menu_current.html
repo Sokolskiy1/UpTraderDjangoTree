@@ -1,9 +1,9 @@
 {% if parents == 0 %}
-    <a href="http://127.0.0.1:8080/menu_tree/"> {{ parents.count }}{{ item.name }}</a>
+    <a href="http://127.0.0.1:8080/menu_tree/" class="current-item"> {{ parents.count }}{{ item.name }}</a>
 {% else %}
     {% for item in current %}
-        <a href="http://127.0.0.1:8080/menu_tree/{{ item.name }}"> {{ item.name }}</a>
+        <a href="http://127.0.0.1:8080/menu_tree/{{ item.name }}" class="current-item"> {{ item.name }}</a>
     {% empty %}
-        <li>No items found</li>
+        <li class="no-items">No items found</li>
     {% endfor %}
 {% endif %}

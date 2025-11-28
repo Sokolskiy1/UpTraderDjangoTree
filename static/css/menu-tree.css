@@ -1,0 +1,105 @@
+.menu-tree {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    padding: 20px;
+}
+
+.menu-tree a {
+    display: block;
+    padding: 8px 12px;
+    margin: 2px 0;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.menu-tree a:hover {
+    background-color: #f5f5f5;
+    transform: translateX(5px);
+}
+
+.menu-tree .parent-item {
+    margin-left: 0;
+    border-left: 3px solid #3498db;
+    background-color: #e8f4fc;
+    font-weight: bold;
+}
+
+.menu-tree .parent-item:hover {
+    background-color: #d4edfa;
+}
+
+.menu-tree .first-parent {
+    margin-left: 0;
+    border-left: 3px solid #2c3e50;
+    background-color: #34495e;
+    color: white;
+    font-weight: bold;
+}
+
+.menu-tree .first-parent:hover {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.menu-tree .current-item {
+    margin-left: 20px;
+    border-left: 3px solid #e74c3c;
+    background-color: #fdedec;
+    font-weight: bold;
+}
+
+.menu-tree .current-item:hover {
+    background-color: #fadbd8;
+}
+
+.menu-tree .child-item {
+    margin-left: 40px;
+    border-left: 3px solid #27ae60;
+    background-color: #eafaf1;
+}
+
+.menu-tree .child-item:hover {
+    background-color: #d4efdf;
+}
+
+.menu-tree .no-items {
+    color: #999;
+    font-style: italic;
+    padding: 8px 12px;
+    margin: 2px 0;
+}
+
+.menu-tree .parent-item::before {
+
+    margin-right: 5px;
+}
+
+.menu-tree .first-parent::before {
+    content: "🏠 ";
+    margin-right: 5px;
+}
+
+.menu-tree .current-item::before {
+    margin-right: 5px;
+}
+
+.menu-tree .child-item::before {
+    margin-right: 5px;
+}
+
+.menu-tree {
+    position: relative;
+}
+
+.menu-tree::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    border-left: 2px dashed #ddd;
+    z-index: -1;
+}

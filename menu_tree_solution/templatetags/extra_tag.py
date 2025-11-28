@@ -16,3 +16,5 @@ def extract_menu_name(url):
         return parts[-1] if parts else ''
 
     return url
+
+
