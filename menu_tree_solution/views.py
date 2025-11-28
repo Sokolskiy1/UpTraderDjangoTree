@@ -1,8 +1,29 @@
+from urllib.parse import urlparse
+
 from django.db import connection
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 
 from menu_tree_solution.models import Menu
-import sqlite3
+
+
+def extract_menu_name(url):
+   if not url:
+      return ''
+
+   if url.startswith(('http://', 'https://') ):
+      parsed = urlparse(url)
+      path = parsed.path
+      parts = path.rstrip('/').split('/')
+      return parts[-1] if parts else ''
+
+   return url
+
+
+def url_normalization(menu_items):
+   print(menu_items)
+   for item in menu_items:
+      item['url'] = extract_menu_name(item['url'])
+   return menu_items
 
 # Create your views here.
 def menu_tree_view(request, name_item_tree=None):
@@ -66,17 +87,17 @@ def menu_tree_view(request, name_item_tree=None):
             'level': row[4]
          })
 
-      print(menu_chain,type(menu_chain))
+      # print(menu_chain,type(menu_chain))
       parents = [obj for obj in menu_chain if obj.get('level', 0) < 0]
       current = [obj for obj in menu_chain if obj.get('level', 0) == 0]
       childrens = [obj for obj in menu_chain if obj.get('level', 0) > 0]
-      print("ptr", parents, current, childrens)
+      # print("ptr", parents, current, childrens)
       context = {
          # 'menu': menu_chain,
          # 'menu_objects': menu_objects
-         'parents': parents,
-         'current': current,
-         'childrens': childrens
+         'parents': url_normalization(parents),
+         'current': url_normalization(current),
+         'childrens': url_normalization(childrens)
       }
 
    else:
@@ -90,7 +111,7 @@ def menu_tree_view(request, name_item_tree=None):
       context = {
          'parents': None,
          'current': menus,
-         # 'childrens': menus_element
+         'childrens': None
       }
    print(context)
    return render(request, 'menu_tree/menu_tree_main.html', context)
