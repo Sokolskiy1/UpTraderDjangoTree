@@ -5,26 +5,6 @@ from django.shortcuts import render
 
 from menu_tree_solution.models import Menu
 
-
-def extract_menu_name(url):
-   if not url:
-      return ''
-
-   if url.startswith(('http://', 'https://') ):
-      parsed = urlparse(url)
-      path = parsed.path
-      parts = path.rstrip('/').split('/')
-      return parts[-1] if parts else ''
-
-   return url
-
-
-def url_normalization(menu_items):
-   print(menu_items)
-   for item in menu_items:
-      item['url'] = extract_menu_name(item['url'])
-   return menu_items
-
 # Create your views here.
 def menu_tree_view(request, name_item_tree=None):
    if name_item_tree:
@@ -95,9 +75,9 @@ def menu_tree_view(request, name_item_tree=None):
       context = {
          # 'menu': menu_chain,
          # 'menu_objects': menu_objects
-         'parents': url_normalization(parents),
-         'current': url_normalization(current),
-         'childrens': url_normalization(childrens)
+         'parents': parents,
+         'current': current,
+         'childrens': childrens
       }
 
    else:
