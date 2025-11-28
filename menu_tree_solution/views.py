@@ -12,19 +12,19 @@ def menu_tree_view(request, name_item_tree=None):
          cursor.execute("""
                     WITH RECURSIVE menu_path AS (
                         -- Начальная точка: элемент с заданным именем
-                        SELECT 
+                        SELECT
                             id,
                             name,
                             url,
                             parent_id,
                             0 as level,
                             'current' as direction
-                        FROM menu_tree_solution_menu 
+                        FROM menu_tree_solution_menu
                         WHERE name = %s
-                    
+
                         UNION ALL
-                    
-                        SELECT 
+
+                        SELECT
                             m.id,
                             m.name,
                             m.url,
@@ -34,11 +34,11 @@ def menu_tree_view(request, name_item_tree=None):
                         FROM menu_tree_solution_menu m
                         INNER JOIN menu_path mp ON m.id = mp.parent_id
                         WHERE mp.direction IN ('current', 'parent') -- Только от текущего и родителей
-                    
+
                         UNION ALL
-                    
+
                         -- Часть 2: Идем вниз к детям (только один уровень)
-                        SELECT 
+                        SELECT
                             m.id,
                             m.name,
                             m.url,
@@ -49,9 +49,9 @@ def menu_tree_view(request, name_item_tree=None):
                         INNER JOIN menu_path mp ON m.parent_id = mp.id
                         WHERE mp.direction = 'current' -- Только от исходного элемента
                     )
-                    SELECT DISTINCT * FROM menu_path 
-                    ORDER BY 
-                        level ASC; 
+                    SELECT DISTINCT * FROM menu_path
+                    ORDER BY
+                        level ASC;
                 """, [name_item_tree])
 
          result = cursor.fetchall()
@@ -94,4 +94,4 @@ def menu_tree_view(request, name_item_tree=None):
          'childrens': None
       }
    print(context)
-   return render(request, 'menu_tree/menu_tree_main.html', context)
+   return render(request, 'menu_tree/main.html', context)
