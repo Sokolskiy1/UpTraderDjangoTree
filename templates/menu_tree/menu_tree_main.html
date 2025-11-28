@@ -1,7 +1,20 @@
 <div class="menu-tree">
 
     {% for item in menu %}
-        <h1>{{ item.name }}</h1>
+        {% if item.parent %}
+        <a href ="http://127.0.0.1:8080/menu_tree/{{ item.parent.name }}">{{ item.parent.name }} </a>
+            {% else %}
+{#        <a href ="http://127.0.0.1:8080/menu_tree/">{{ item.parent.name }} </a>#}
+        {% endif %}
+         <h1>{{ item.name }}</h1>
+
+                        {% for item_children in item.children.all %}
+
+{#                             <h1>{{ item_children.name }}</h1>#}
+                             <a href ="{{ item_children.url }}">{{ item_children.name }} </a>
+                        {% empty %}
+                        <li>No items found</li>
+                    {% endfor %}
     {% empty %}
     <li>No items found</li>
 {% endfor %}
