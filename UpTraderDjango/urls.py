@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import RedirectView
 
 from menu_tree_solution.views import  menu_tree_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', RedirectView.as_view(url='/menu_tree/')),
 
     path('menu_tree/<str:name_item_tree>/', menu_tree_view, name='menu_tree_main'),
     path('menu_tree/', menu_tree_view, name='menu_tree_main'),
